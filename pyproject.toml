@@ -8,6 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+sqlalchemy = {extras = ["asyncpg"], version = "^2.0.40"}
 
 
 [tool.poetry.group.dev.dependencies]
