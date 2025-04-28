@@ -1,4 +1,7 @@
-from abc import ABC, abstractmethod
+from abc import (
+    ABC,
+    abstractmethod,
+)
 from dataclasses import dataclass
 
 
@@ -12,6 +15,7 @@ class BaseAppError(Exception, ABC):
     - logic
     - infrastructure
     """
+
     message: str
 
     @property
