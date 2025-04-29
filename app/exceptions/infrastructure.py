@@ -25,3 +25,7 @@ class UserNotFoundError(InfrastructureError):
 
 @dataclass(eq=False)
 class UnknownTopicError(InfrastructureError): ...
+
+
+@dataclass(eq=False)
+class TopicNotFoundInFactoryError(InfrastructureError): ...
