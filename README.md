@@ -97,6 +97,9 @@ class Group:
   users: list[UserEntity] = field(default_factory=list)
 ```
 
+> [!IMPORTANT]
+> Из-за того, что логика так построена, невозможно использовать для индекса тип данных `Integer`, более рационально использовать `UUID`. 
+
 > [!NOTE]
 > Если Вы хотите добавить новый `value object`, то создайте `Python` файл, который будет иметь имя домена, чтобы обозначить принадлежность `value object` к `domain entity`.
 > Например, `group.py`. Ваш класс должен наследоваться от [`BaseValueObject`](app/domain/values/base.py). Пример прилагаю ниже:
@@ -343,7 +346,9 @@ class CreateGroupCommandHandler(HumanCommandHandler[CreateGroupCommand]):
                 CreateGroupCommand: CreateGroupCommandHandler
             },
         )
-``` 
+```
+
+С `events` похожая история, тут смысла дублировать информацию нет. Единственное исключение - есть пробрасывание брокера сообщений. Для этого я использовать `Kafka` и `FastStream`. 
 
 ## Что такое `settings`?
 
