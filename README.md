@@ -326,7 +326,7 @@ class CreateGroupCommandHandler(HumanCommandHandler[CreateGroupCommand]):
 ```
 
 Но встает вопрос. Как это все связать, чтобы все заработало? Вам нужно добавить вот [здесь](app/logic/handlers/container.py) в словарике команду и её перехватчик.
-Например, чтобы добавить команду и наш хендлер, нужно в конце добавить значение `RegisterHumanCommand: RegisterHumanCommandHandler`. В результате у Вас должен получится вот такой словарик. 
+Например, чтобы добавить команду и наш хендлер, нужно в конце добавить значение `CreateGroupCommand: CreateGroupCommandHandler`. В результате у Вас должен получится вот такой словарик. 
 
 ```python
 @provide(scope=Scope.APP)
