@@ -20,8 +20,9 @@ class SQLAlchemyUsersRepository(SQLAlchemyAbstractRepository, UsersRepository):
     @override
     async def add(self, model: UserEntity) -> UserEntity:
         result: Result = await self._session.execute(
-            insert(UserEntity).values(**await model.to_dict()).returning(UserEntity)
+            insert(UserEntity).values(**await model.to_dict(save_classes_value_objects=True)).returning(UserEntity)
         )
+
         return result.scalar_one()
 
     @override
@@ -33,7 +34,10 @@ class SQLAlchemyUsersRepository(SQLAlchemyAbstractRepository, UsersRepository):
     @override
     async def update(self, oid: str, model: UserEntity) -> UserEntity:
         result: Result = await self._session.execute(
-            update(UserEntity).filter_by(oid=oid).values(**await model.to_dict(exclude={"oid"})).returning(UserEntity)
+            update(UserEntity)
+            .filter_by(oid=oid)
+            .values(**await model.to_dict(exclude={"oid"}, save_classes_value_objects=True))
+            .returning(UserEntity)
         )
 
         return result.scalar_one()
